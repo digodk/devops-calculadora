@@ -1,0 +1,32 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Caches do Jupyter Notebook
+.ipynb_checkpoints
+
+# Arquivos e diretórios gerados por ferramentas
+*.pyo
+*.pyd
+.Python
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Arquivos temporários e de backup
+*.bak
+*.swp
+*.swo
+*~.nib
+.localized
+Icon?
+
+# Arquivos de log
+*.log
+
+# Arquivos do sistema operacional
+.DS_Store
+Thumbs.db
