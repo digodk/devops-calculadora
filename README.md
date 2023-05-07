@@ -1,1 +1,5 @@
-# desafio-calculadora
+# Exercício - Calculadora em Python
+## Escopo
+Implementar um programa Python que simule uma calculadora simples, onde o usuário possa escolher entre as operações de soma, subtração, multiplicação e divisão. O programa deve solicitar dois números e a operação desejada, calcular o resultado e exibir o resultado na tela. Deve atuar como calculadora de fita, imprimindo os comandos conforme digitados, além de imprimir o resultado depois de solicitado pelo usuário.
+
+Criar um repositório no GitHub e adicionar um projeto Python simples (pode ser a calculadora simples do item 1 ou outro projeto de sua escolha). Os alunos devem praticar o uso do Git e GitHub, adicionando arquivos, fazendo commits, criando branches e, se possível, colaborando com outros alunos por meio de pull requests e revisões de código. Obrigatório deixar Aberto ao publico.
