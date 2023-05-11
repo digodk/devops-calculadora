@@ -15,23 +15,36 @@ def calcular():
     num1 = 0
     num2 = 0
     while not concluido:
-        entrada = input('Por favor digite o número ou a operação desejada')
+        entrada = input('Por favor digite o número ou a operação desejada: ')
         try:
             num = float(entrada)
             if operador:
                 num2 = num
             else:
                 num1 = num
-            output = num
+            prompt = num
         except ValueError:
-            output = entrada
-            #TODO incluir regex para validar operadores, se falhar, notifica usuário, senão armazena e registra no terminal
-            output = 'não reconheci o que você digitou! Por favor digite apenas números ou operadores válidos'
-            operador = entrada
-            #TODO se for adicionado operador de conclusão, então executar o cálculo e registrar o resultado 
+            #TODO incluir regex para validar operadores, se falhar, notifica usuário, senão armazena e exibe o prompt abaixo.
+            prompt = 'não reconheci o que você digitou! Por favor digite apenas números ou operadores válidos'
+            if entrada == '=':
+                if operador:
+                    concluido = True
+                    resultado = eval(f'{num1} {operador} {num2}')
+                    print_apagando_linha('-'*10, True)
+                    prompt = f'{num1} {operador} {num2} = {resultado}'
+                else:
+                    prompt = 'Você digitou o caractere de conclusão de cálculo, mas você não informou qual operação deseja fazer!'
+            else:
+                operador = entrada
+                prompt = entrada
             
-        print(output)
+        print_apagando_linha(prompt)
     return resultado
 
+def print_apagando_linha(prompt, nova_linha=False):
+    print(f'\033[1A {prompt} \033[K')
+    if nova_linha:
+        print('\n')
+
 if __name__ == '__main__':
-    calcular
+    calcular()
