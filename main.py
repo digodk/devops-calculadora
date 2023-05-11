@@ -1,14 +1,15 @@
 import re
 
-#TODO mensagem de boas vindas informando os operadores válidos
-'''
-+ -> Soma
-- -> Subtração
-* -> Multiplicação
-/ -> Divisão
-= -> Conclusão
-'''
 def calcular():
+    print('''Olá! Eu sou a calculadora de fita! Para começar, basta digitar o número ou operação que você deseja.
+             Operações válidas:
+             + -> Soma
+            - -> Subtração
+            * -> Multiplicação
+            / -> Divisão
+            = -> Conclusão
+            c -> Limpar
+            ''')
     concluido = False
     resultado = 0
     operador = None
@@ -24,27 +25,41 @@ def calcular():
                 num1 = num
             prompt = num
         except ValueError:
-            #TODO incluir regex para validar operadores, se falhar, notifica usuário, senão armazena e exibe o prompt abaixo.
-            prompt = 'não reconheci o que você digitou! Por favor digite apenas números ou operadores válidos'
-            if entrada == '=':
-                if operador:
-                    concluido = True
-                    resultado = eval(f'{num1} {operador} {num2}')
-                    print_apagando_linha('-'*10, True)
-                    prompt = f'{num1} {operador} {num2} = {resultado}'
-                else:
-                    prompt = 'Você digitou o caractere de conclusão de cálculo, mas você não informou qual operação deseja fazer!'
+            if not re.match('^[*+\-/c=]$', entrada):
+                prompt = 'Não reconheci o que você digitou! Por favor digite apenas números ou operadores válidos'
             else:
-                operador = entrada
-                prompt = entrada
-            
+                if entrada == '=':
+                    if operador:
+                        concluido = True
+                        resultado = eval(f'{num1} {operador} {num2}')
+                        print_apagando_linha('='*10, True)
+                        prompt = f'{num1} {operador} {num2} = {resultado}'
+                    else:
+                        prompt = 'Você digitou o caractere de conclusão de cálculo, mas você não informou qual operação deseja fazer!'
+                elif entrada == 'c':
+                    num1 = 0
+                    num2 = 0
+                    operador = None
+                else:
+                    operador = entrada
+                    prompt = entrada
+
         print_apagando_linha(prompt)
     return resultado
 
+
 def print_apagando_linha(prompt, nova_linha=False):
-    print(f'\033[1A {prompt} \033[K')
+    apagar_linha_acima()
+    print(prompt)
     if nova_linha:
-        print('\n')
+        print()
+
+
+def apagar_linha_acima():
+    LINHA_ACIMA = '\033[1A'
+    LIMPAR_LINHA = '\x1b[2K'
+    print(LINHA_ACIMA, end=LIMPAR_LINHA)
+
 
 if __name__ == '__main__':
     calcular()
